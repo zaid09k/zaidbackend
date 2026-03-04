@@ -1,11 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 // ===== CONFIG =====
 const PORT = process.env.PORT || 3000;      // ✅ Railway compatible
 const MONGO_URI = process.env.MONGO_URI;    // ✅ Env variable
 
 const app = express();
+app.use(cors({
+  origin: [
+    "https://usdtseller-production.up.railway.app" // frontend URL
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"]
+}));
+
 app.use(express.json());
 
 // ===== MongoDB Setup =====
